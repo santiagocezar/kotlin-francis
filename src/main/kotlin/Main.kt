@@ -1,3 +1,5 @@
+import kotlin.math.pow
+
 fun ej1() {
     println("hola mundo!!! nashe")
 }
@@ -119,15 +121,13 @@ fun ej12() {
         print("Ingrese el número $n: ")
         total += readLine()!!.toInt()
     }
-
     val promedio = total / 3f
-    if (promedio >= 7) {
-        println("Promocionado")
-    } else if (promedio >= 4) {
-        println("Regular")
-    } else {
-        println("Reprobado \uD83D\uDE2D\uD83D\uDE2D\uD83D\uDE2D")
-    }
+    val nota =
+        if (promedio >= 7) "Promocionado"
+        else if (promedio >= 4) "Regular"
+        else "Reprobado \uD83D\uDE2D\uD83D\uDE2D\uD83D\uDE2D"
+
+    println(nota)
 }
 
 fun ej13() {
@@ -146,6 +146,7 @@ fun ej13() {
 
     println(nivel)
 }
+
 
 fun ej14() {
     print("Ingrese el día: ")
@@ -169,14 +170,29 @@ fun ej15() {
     val n3 = readLine()!!.toInt()
 
     if (n1 == n2 && n2 == n3) {
-        val cubo = n1 * n1 * n1
+        val cubo = n1.toFloat().pow(3)
         println("El cubo es $cubo")
     } else {
         println("Los números no son iguales :P")
     }
 }
 
+fun ej16() {
+    var algunoDeLosNumerosEsMenorADiez = false
+
+    for (i in 1..3) {
+        print("Ingrese el número $i: ")
+        val n = readLine()!!.toInt()
+        if (n < 10) algunoDeLosNumerosEsMenorADiez = true
+    }
+
+    if (algunoDeLosNumerosEsMenorADiez) {
+        println("Alguno de los números es menor a diez... ඞ")
+    } else {
+        println("Ninguno de los números es menor a diez!!")
+    }
+}
+
 fun main() {
-    ej14()
-    ej15()
+    ej16()
 }
