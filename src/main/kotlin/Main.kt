@@ -1,198 +1,209 @@
-import kotlin.math.pow
+import kotlin.random.Random
 
-fun ej1() {
-    println("hola mundo!!! nashe")
-}
+class TP4 {
+    companion object {
+        fun ej1() {
+            val arr = Array(5) {
+                print("Ingrese el número ${it + 1}: ")
+                readLine()!!.toFloat()
+            }
 
-fun ej2() {
-    val n1: Int = 24
-    val n2: Int = 6
-    var suma = n1 + n2
-    println("La suma es $suma")
-    var producto = n1 * n2
-    println("y el producto $producto")
-}
+            println("El primero fue el ${arr[0]}")
+            println("Y el úlitmo el ${arr[4]}")
+        }
 
-fun ej3() {
-    val alturaEnMetrosA: Float
-    val alturaEnMetrosB: Float
-    val alturaEnMetrosC: Float
-    // la f hace falta si o si :/
-    alturaEnMetrosB = 1.71f
-    alturaEnMetrosA = 1.58f
-    alturaEnMetrosC = 1.66f
-    val promedio: Float = (alturaEnMetrosA + alturaEnMetrosB + alturaEnMetrosC) / 3 // pero acá no¿? :/
-    println("El promedio es $promedio")
-}
+        fun ej2() {
+            val arr = Array(10) {
+                print("Ingrese el sueldo del empleado N°${it + 1}: ")
+                readLine()!!.toFloat()
+            }
 
-fun ej4() {
-    val ancho = 20
-    val alto = 35
+            arr.forEachIndexed { i, sueldo ->
+                println("El empleado N°${i+1} cobra $sueldo")
+            }
+        }
+        fun ej3() {
+            val arr = Array(5) {
+                print("Ingrese la altura de la persona N°${it + 1}: ")
+                readLine()!!.toFloat()
+            }
 
-    val perimetro = ancho * 2 + alto * 2
-    val superficie = ancho * alto
+            val prom = arr.sum() / arr.size
+            var bajo = 0
+            var alto = 0
 
-    println("El perimetro del rectángulo es $perimetro y tiene una superficie de $superficie")
-}
+            arr.forEach {
+                if (it > prom) alto ++
+                else bajo ++
+            }
 
-fun ej5() {
-    print("Ingrese el número 1: ")
-    val n1 = readLine()!!.toInt()
-    print("Ingrese el número 2: ")
-    val n2 = readLine()!!.toInt()
-    val suma = n1 + n2
-    println("La suma es $suma")
-    val producto = n1 * n2
-    println("y el producto $producto")
-}
+            println("$bajo personas están por debajo del promedio")
+            println("y $alto por encima del promedio")
+        }
 
-fun ej6() {
-    print("Ingrese el precio del artículo: ")
-    val precio = readLine()!!.toInt()
-    print("Ingrese la cantidad que piensa comprar: ")
-    val cantidad = readLine()!!.toInt()
-    val total = precio * cantidad
-    println("El cliente debe abonar $total")
-}
+        fun ej4() {
+            val ar1 = Array(4) {
+                print("Ingrese el N°${it + 1} del arreglo 1: ")
+                readLine()!!.toInt()
+            }
+            val ar2 = Array(4) {
+                print("Ingrese el N°${it + 1} del arreglo 2: ")
+                readLine()!!.toInt()
+            }
+            val arr = Array(4) {
+                ar1[it] + ar2[it]
+            }
+            arr.forEach {
+                println("$it")
+            }
+        }
 
-fun ej7() {
-    var total = 0
-    for (n in 1..4) {
-        print("Ingrese el número $n: ")
-        total += readLine()!!.toInt()
-    }
-    val promedio = total / 4f
-    println("El total es $total")
-    println("Y el promedio $promedio")
-}
+        fun ej5() {
+            val arr = Array(4) {
+                print("Ingrese el N°${it + 1}: ")
+                readLine()!!.toInt()
+            }
 
-fun ej8() {
-    print("Ingrese su sueldo: ")
-    val sueldo = readLine()!!.toInt()
+            print("Ingrese el número a buscar: ")
+            val busc = readLine()!!.toInt()
 
-    if (sueldo > 100_000) {
-        println("tiene que pagar impuestos :(")
-    } else {
-        println("No tiene que pagar impuestos \uD83D\uDE0E")
-    }
-}
+            var pos = -1
 
-fun ej9() {
-    print("Ingrese número 1: ")
-    val n1 = readLine()!!.toInt()
-    print("Ingrese número 2: ")
-    val n2 = readLine()!!.toInt()
+            arr.forEachIndexed {i, it ->
+                if (it == busc) pos = i
+            }
 
-    val mayor = if (n1 > n2) n1 else n2
-
-    println("El más grande es el $mayor")
-}
-
-fun ej10() {
-    print("Ingrese el número 1: ")
-    val n1 = readLine()!!.toInt()
-    print("Ingrese el número 2: ")
-    val n2 = readLine()!!.toInt()
-
-    if (n1 < n2) {
-        println("La suma es ${n1 + n2}")
-        println("y la resta ${n2 - n1}")
-    } else {
-        println("El producto es ${n1 * n2}")
-        println("y la división ${n1 / n2}")
-    }
-}
-
-fun ej11() {
-    var total = 0
-    for (n in 1..3) {
-        print("Ingrese la nota $n: ")
-        total += readLine()!!.toInt()
-    }
-    val promedio = total / 3f
-    if (promedio >= 7) {
-        println("Promocionado")
-    }
-}
-
-fun ej12() {
-    var total = 0
-    for (n in 1..3) {
-        print("Ingrese el número $n: ")
-        total += readLine()!!.toInt()
-    }
-    val promedio = total / 3f
-    val nota =
-        if (promedio >= 7) "Promocionado"
-        else if (promedio >= 4) "Regular"
-        else "Reprobado \uD83D\uDE2D\uD83D\uDE2D\uD83D\uDE2D"
-
-    println(nota)
-}
-
-fun ej13() {
-    print("Ingrese la cantidad total de preguntas: ")
-    val total = readLine()!!.toInt() // se convierte después a float, no puede haber media pregunta
-    print("Ingrese la cantidadd de correctas: ")
-    val correctas = readLine()!!.toInt()
-    val porc = correctas / total.toFloat()
-
-    val nivel =
-        if (porc >= .9f) "Nivel máximo"
-        else if (porc >= .75f) "Nivel medio"
-        else if (porc >= .5f) "Nivel regular"
-        else if (porc >= .25f) "Nivel muy bajo"
-        else "Fuera de nivel"
-
-    println(nivel)
-}
+            if (pos >= 0) {
+                println("$busc está en la posición $pos")
+            } else {
+                println("$busc no existe en el arreglo")
+            }
+        }
 
 
-fun ej14() {
-    print("Ingrese el día: ")
-    val dia = readLine()!!.toInt()
-    print("y el mes: ")
-    val mes = readLine()!!.toInt()
+        fun ej6() {
+            val arr = Array(10) {
+                print("Ingrese el N°${it + 1}: ")
+                readLine()!!.toInt()
+            }
 
-    if (dia == 25 && mes == 12) {
-        println("Merry christmas!! \uD83C\uDF85")
-    } else {
-        println("no es navidad :(")
-    }
-}
+            val power = arr.map {
+                it*it
+            }
+            arr.forEach {
+                print("$it ")
+            }
+            println()
+            power.forEach {
+                print("$it ")
+            }
+            println()
+        }
 
-fun ej15() {
-    print("Ingrese un número: ")
-    val n1 = readLine()!!.toInt()
-    print("y otro: ")
-    val n2 = readLine()!!.toInt()
-    print("y otro más...: ")
-    val n3 = readLine()!!.toInt()
+        fun ej7() {
+            val temps = Array(31) {
+                Random.nextInt(-20, 20)
+            }
 
-    if (n1 == n2 && n2 == n3) {
-        val cubo = n1.toFloat().pow(3)
-        println("El cubo es $cubo")
-    } else {
-        println("Los números no son iguales :P")
-    }
-}
+            val total = temps.sum()
 
-fun ej16() {
-    var algunoDeLosNumerosEsMenorADiez = false
+            temps.forEachIndexed { i, temp ->
+                if ((total > 0 && i % 2 == 0) || (total <= 0 && i %2 == 1)) {
+                    println("$i => $temp°C")
+                }
+            }
+        }
 
-    for (i in 1..3) {
-        print("Ingrese el número $i: ")
-        val n = readLine()!!.toInt()
-        if (n < 10) algunoDeLosNumerosEsMenorADiez = true
-    }
+        fun ej8() {
+            val nums = Array(10) {
+                Random.nextInt(10)
+            }
 
-    if (algunoDeLosNumerosEsMenorADiez) {
-        println("Alguno de los números es menor a diez... ඞ")
-    } else {
-        println("Ninguno de los números es menor a diez!!")
+            var inc = 0
+            var dec = 0
+            var prev = nums[0]
+            nums.forEach {
+                if (it < prev) {
+                    dec ++
+                } else if (it > prev) {
+                    inc ++
+                }
+                prev = it
+            }
+
+            println("Creció $inc veces")
+            println("Dereció $dec veces")
+        }
+
+        fun ej9() {
+            val nums = Array(10) {
+                Random.nextInt(10)
+            }
+            nums.forEachIndexed { i, it -> if (i == 0) {
+                print("[$it")
+            } else {
+                print(", $it")
+            }}
+            println("]")
+
+            for (i in 1 until nums.size) {
+                for (j in 0 until nums.size-i) {
+                    if (nums[j] > nums[j+1]) {
+                        val tmp = nums[j]
+                        nums[j] = nums[j+1]
+                        nums[j+1] = tmp
+                    }
+                }
+            }
+
+            nums.forEachIndexed { i, it -> if (i == 0) {
+                print("[$it")
+            } else {
+                print(", $it")
+            }}
+            println("]")
+        }
+
+
+        fun ej10() {
+            var n = 0
+
+            do {
+                print("ingrese cuantos elementos tiene el vector: ")
+                n= readLine()!!.toInt()
+            } while (n >= 25)
+
+            val nums = Array(n) {
+                Random.nextInt(n)
+            }
+
+            nums.forEachIndexed { i, it -> if (i == 0) {
+                print("[$it")
+            } else {
+                print(", $it")
+            }}
+            println("]")
+
+            for (i in 1 until nums.size) {
+                for (j in 0 until nums.size-i) {
+                    if (nums[j] > nums[j+1]) {
+                        val tmp = nums[j]
+                        nums[j] = nums[j+1]
+                        nums[j+1] = tmp
+                    }
+                }
+            }
+
+            nums.forEachIndexed { i, it -> if (i == 0) {
+                print("[$it")
+            } else {
+                print(", $it")
+            }}
+            println("]")
+        }
     }
 }
 
 fun main() {
-    ej16()
+    TP4.ej10()
 }
