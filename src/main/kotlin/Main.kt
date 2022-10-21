@@ -19,9 +19,10 @@ class TP4 {
             }
 
             arr.forEachIndexed { i, sueldo ->
-                println("El empleado N°${i+1} cobra $sueldo")
+                println("El empleado N°${i + 1} cobra $sueldo")
             }
         }
+
         fun ej3() {
             val arr = Array(5) {
                 print("Ingrese la altura de la persona N°${it + 1}: ")
@@ -33,8 +34,8 @@ class TP4 {
             var alto = 0
 
             arr.forEach {
-                if (it > prom) alto ++
-                else bajo ++
+                if (it > prom) alto++
+                else bajo++
             }
 
             println("$bajo personas están por debajo del promedio")
@@ -69,7 +70,7 @@ class TP4 {
 
             var pos = -1
 
-            arr.forEachIndexed {i, it ->
+            arr.forEachIndexed { i, it ->
                 if (it == busc) pos = i
             }
 
@@ -88,7 +89,7 @@ class TP4 {
             }
 
             val power = arr.map {
-                it*it
+                it * it
             }
             arr.forEach {
                 print("$it ")
@@ -108,7 +109,7 @@ class TP4 {
             val total = temps.sum()
 
             temps.forEachIndexed { i, temp ->
-                if ((total > 0 && i % 2 == 0) || (total <= 0 && i %2 == 1)) {
+                if ((total > 0 && i % 2 == 0) || (total <= 0 && i % 2 == 1)) {
                     println("$i => $temp°C")
                 }
             }
@@ -124,9 +125,9 @@ class TP4 {
             var prev = nums[0]
             nums.forEach {
                 if (it < prev) {
-                    dec ++
+                    dec++
                 } else if (it > prev) {
-                    inc ++
+                    inc++
                 }
                 prev = it
             }
@@ -139,28 +140,32 @@ class TP4 {
             val nums = Array(10) {
                 Random.nextInt(10)
             }
-            nums.forEachIndexed { i, it -> if (i == 0) {
-                print("[$it")
-            } else {
-                print(", $it")
-            }}
+            nums.forEachIndexed { i, it ->
+                if (i == 0) {
+                    print("[$it")
+                } else {
+                    print(", $it")
+                }
+            }
             println("]")
 
             for (i in 1 until nums.size) {
-                for (j in 0 until nums.size-i) {
-                    if (nums[j] > nums[j+1]) {
+                for (j in 0 until nums.size - i) {
+                    if (nums[j] > nums[j + 1]) {
                         val tmp = nums[j]
-                        nums[j] = nums[j+1]
-                        nums[j+1] = tmp
+                        nums[j] = nums[j + 1]
+                        nums[j + 1] = tmp
                     }
                 }
             }
 
-            nums.forEachIndexed { i, it -> if (i == 0) {
-                print("[$it")
-            } else {
-                print(", $it")
-            }}
+            nums.forEachIndexed { i, it ->
+                if (i == 0) {
+                    print("[$it")
+                } else {
+                    print(", $it")
+                }
+            }
             println("]")
         }
 
@@ -170,40 +175,118 @@ class TP4 {
 
             do {
                 print("ingrese cuantos elementos tiene el vector: ")
-                n= readLine()!!.toInt()
+                n = readLine()!!.toInt()
             } while (n >= 25)
 
             val nums = Array(n) {
                 Random.nextInt(n)
             }
 
-            nums.forEachIndexed { i, it -> if (i == 0) {
-                print("[$it")
-            } else {
-                print(", $it")
-            }}
+            nums.forEachIndexed { i, it ->
+                if (i == 0) {
+                    print("[$it")
+                } else {
+                    print(", $it")
+                }
+            }
             println("]")
 
             for (i in 1 until nums.size) {
-                for (j in 0 until nums.size-i) {
-                    if (nums[j] > nums[j+1]) {
+                for (j in 0 until nums.size - i) {
+                    if (nums[j] > nums[j + 1]) {
                         val tmp = nums[j]
-                        nums[j] = nums[j+1]
-                        nums[j+1] = tmp
+                        nums[j] = nums[j + 1]
+                        nums[j + 1] = tmp
                     }
                 }
             }
 
-            nums.forEachIndexed { i, it -> if (i == 0) {
-                print("[$it")
-            } else {
-                print(", $it")
-            }}
+            nums.forEachIndexed { i, it ->
+                if (i == 0) {
+                    print("[$it")
+                } else {
+                    print(", $it")
+                }
+            }
             println("]")
+        }
+
+        fun <T> printArray(arr: Array<T>) {
+            arr.forEachIndexed { i, it ->
+                if (i == 0) {
+                    print("[$it")
+                } else {
+                    print(", $it")
+                }
+            }
+            println("]")
+        }
+
+        fun ej11() {
+            val nums = Array(10) {
+                print("Ingrese el N°${it + 1}: ")
+                readLine()!!.toInt()
+            }
+
+            var prev = nums[0]
+            for (n in nums) {
+                if (n < prev) {
+                    println("no está ordenado...")
+                    return
+                }
+                prev = n
+            }
+            println("esta ordenado!")
+        }
+
+        fun ej12() {
+            var n: Int
+
+            do {
+                print("ingrese cuantos elementos tiene el vector: ")
+                n = readLine()!!.toInt()
+            } while (n >= 25)
+
+            val nums = Array(n) {
+                Random.nextInt(n)
+            }
+            printArray(nums)
+
+            val ordFun: (Int, Int) -> Boolean
+            while (true) {
+                print("como quiere ordenar el vector? > (mayor a menor) ó < (menor a mayor): ")
+                ordFun = when (readLine()!!) {
+                    ">" -> { a, b -> a < b }
+                    "<" -> { a, b -> a > b }
+                    else -> continue
+                }
+                break
+            }
+
+            for (i in 1 until nums.size) {
+                for (j in 0 until nums.size - i) {
+                    if (ordFun(nums[j], nums[j + 1])) {
+                        val tmp = nums[j]
+                        nums[j] = nums[j + 1]
+                        nums[j + 1] = tmp
+                    }
+                }
+            }
+
+            printArray(nums)
+        }
+
+        fun ej13() {
+            val arr = Array(30) {
+                Random.nextInt(it)
+            }
+
+
         }
     }
 }
 
 fun main() {
-    TP4.ej10()
+    TP4.ej11()
+    TP4.ej12()
 }
