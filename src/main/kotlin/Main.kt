@@ -211,12 +211,14 @@ class TP4 {
             println("]")
         }
 
-        fun <T> printArray(arr: Array<T>) {
-            arr.forEachIndexed { i, it ->
+        fun <T> printArray(arr: Array<T>) = printArraySize(arr,arr.size)
+
+        fun <T> printArraySize(arr: Array<T>, size: Int) {
+            for (i in 0 until size) {
                 if (i == 0) {
-                    print("[$it")
+                    print("[${arr[i]}")
                 } else {
-                    print(", $it")
+                    print(", ${arr[i]}")
                 }
             }
             println("]")
@@ -276,17 +278,99 @@ class TP4 {
             printArray(nums)
         }
 
+        fun ordenar(arr: Array<Int>, size: Int, ord: (Int, Int) -> Boolean): Array<Int> {
+            for (i in 1 until size) {
+                for (j in 0 until size - i) {
+                    if (ord(arr[j], arr[j + 1])) {
+                        val tmp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = tmp
+                    }
+                }
+            }
+            return arr
+        }
+
+        fun obtenerOrdenamiento(msg: String): (Int, Int) -> Boolean {
+            while (true) {
+                print("$msg > (mayor a menor) ó < (menor a mayor): ")
+                when (readLine()!!) {
+                    ">" -> return { a, b -> a < b }
+                    "<" -> return { a, b -> a > b }
+                }
+            }
+        }
+
         fun ej13() {
             val arr = Array(30) {
-                Random.nextInt(it)
+                Random.nextInt(1, 35)
             }
 
+            var calor = Array(30) {0}
+            var frio = Array(30) {0}
+            var calorPos = 0
+            var frioPos = 0
 
+            var total = 0
+
+            for (temp in arr) {
+                total += temp
+                if (temp > 20) {
+                    calor[calorPos++] = temp
+                } else{
+                    frio[frioPos++] = temp
+                }
+            }
+
+            val calorOrd = obtenerOrdenamiento("Como ordenar las temperaturas mayores a 20")
+            val frioOrd = obtenerOrdenamiento("Como ordenar las temperaturas menores a 20")
+
+            calor = ordenar(calor, calorPos, calorOrd)
+            frio = ordenar(frio, frioPos, frioOrd)
+
+            println("Promedio de las temperaturas ${total.toFloat() / arr.size}")
+
+            print("Mayores a 20: ")
+            printArraySize(calor, calorPos)
+            print("Menores a 20: ")
+            printArraySize(frio, frioPos)
+        }
+
+        fun ej14() {
+            print("ingrese cuantos elementos tiene el vector: ")
+            val n = readLine()!!.toInt()
+
+            val pri = Array(n) {
+                Random.nextInt(n*2)
+            }
+            val sec = Array(n) {
+                Random.nextInt(n*2)
+            }
+            val tri = Array(n) {
+                0
+            }
+            var triPos = 0
+
+            for (n1 in pri) {
+                var ta = false
+                for (n2 in sec) {
+                    if (n1 == n2) {
+                        ta = true
+                        break
+                    }
+                }
+                if (!ta) {
+                    tri[triPos++] = n1
+                }
+            }
+
+            printArray(pri)
+            printArray(sec)
+            printArraySize(tri, triPos)
         }
     }
 }
 
 fun main() {
-    TP4.ej11()
-    TP4.ej12()
+    TP4.ej14()
 }
