@@ -211,7 +211,7 @@ class TP4 {
             println("]")
         }
 
-        fun <T> printArray(arr: Array<T>) = printArraySize(arr,arr.size)
+        fun <T> printArray(arr: Array<T>) = printArraySize(arr, arr.size)
 
         fun <T> printArraySize(arr: Array<T>, size: Int) {
             for (i in 0 until size) {
@@ -306,8 +306,8 @@ class TP4 {
                 Random.nextInt(1, 35)
             }
 
-            var calor = Array(30) {0}
-            var frio = Array(30) {0}
+            var calor = Array(30) { 0 }
+            var frio = Array(30) { 0 }
             var calorPos = 0
             var frioPos = 0
 
@@ -317,7 +317,7 @@ class TP4 {
                 total += temp
                 if (temp > 20) {
                     calor[calorPos++] = temp
-                } else{
+                } else {
                     frio[frioPos++] = temp
                 }
             }
@@ -341,10 +341,10 @@ class TP4 {
             val n = readLine()!!.toInt()
 
             val pri = Array(n) {
-                Random.nextInt(n*2)
+                Random.nextInt(n * 2)
             }
             val sec = Array(n) {
-                Random.nextInt(n*2)
+                Random.nextInt(n * 2)
             }
             val tri = Array(n) {
                 0
@@ -368,9 +368,92 @@ class TP4 {
             printArray(sec)
             printArraySize(tri, triPos)
         }
+
+        fun semana(i: Int) = when (i % 7) {
+            0 -> "lunes"
+            1 -> "martes"
+            2 -> "miercoles"
+            3 -> "jueves"
+            4 -> "viernes"
+            5 -> "sábado"
+            6 -> "domingo"
+            else -> "cómo"
+        }
+
+        fun cargarCaja(n: Int): Array<Int> {
+            val caj = Array(6) { 0 }
+
+            println("== Caja $n ==")
+            for (i in caj.indices) {
+                print("Ingrese los ingresos del ${semana(i)}: ")
+                caj[i] = readLine()!!.toInt()
+            }
+
+            return caj
+        }
+
+        fun ej15() {
+            val caj1 = cargarCaja(1)
+            val caj2 = cargarCaja(2)
+
+            var caj1Sum = 0
+            var caj1Min = Int.MAX_VALUE
+            var caj1Idx = 0
+            var caj2Sum = 0
+            var caj2Min = Int.MAX_VALUE
+            var caj2Idx = 0
+
+            for (i in caj1.indices) {
+                caj1Sum += caj1[i]
+                caj2Sum += caj2[i]
+                if (caj1[i] <= caj1Min) {
+                    caj1Min = caj1[i]
+                    caj1Idx = i
+                }
+                if (caj2[i] <= caj2Min) {
+                    caj2Min = caj2[i]
+                    caj2Idx = i
+                }
+            }
+
+            if (caj1Sum > caj2Sum) {
+                println("La caja 1 vendió más ($$caj1Sum)")
+            } else {
+                println("La caja 2 vendió más ($$caj2Sum)")
+            }
+
+            println("El día con menos ventas de la caja 1 fue el ${semana(caj1Idx)} ($$caj1Min)")
+            println("Y el de la caja 1 fue el ${semana(caj2Idx)} ($$caj1Min)")
+        }
+
+        fun ej16() {
+            var arr1 = Array(10) {
+                print("Ingrese el N°${it + 1}: ")
+                readLine()!!.toInt()
+            }
+
+            arr1 = ordenar(arr1, arr1.size, {a,b->a > b})
+
+            val arr2 = Array(10) {
+                0
+            }
+
+            var prev= arr1[0]
+            var i = 0
+            for (n in arr1) {
+                if (prev != n) {
+                    i ++
+                    prev = n
+                }
+                arr2[i] ++
+            }
+
+            printArray(arr1)
+            printArraySize(arr2, i+1)
+        }
     }
 }
 
 fun main() {
-    TP4.ej14()
+    TP4.ej16()
 }
