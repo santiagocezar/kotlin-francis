@@ -214,12 +214,10 @@ class TP4 {
         fun <T> printArray(arr: Array<T>) = printArraySize(arr, arr.size)
 
         fun <T> printArraySize(arr: Array<T>, size: Int) {
+            print("[")
             for (i in 0 until size) {
-                if (i == 0) {
-                    print("[${arr[i]}")
-                } else {
-                    print(", ${arr[i]}")
-                }
+                if (i > 0) print(", ")
+                print("${arr[i]}")
             }
             println("]")
         }
@@ -432,28 +430,80 @@ class TP4 {
                 readLine()!!.toInt()
             }
 
-            arr1 = ordenar(arr1, arr1.size, {a,b->a > b})
+            arr1 = ordenar(arr1, arr1.size, { a, b -> a > b })
 
             val arr2 = Array(10) {
                 0
             }
 
-            var prev= arr1[0]
+            var prev = arr1[0]
             var i = 0
             for (n in arr1) {
                 if (prev != n) {
-                    i ++
+                    i++
                     prev = n
                 }
-                arr2[i] ++
+                arr2[i]++
             }
 
             printArray(arr1)
-            printArraySize(arr2, i+1)
+            printArraySize(arr2, i + 1)
+        }
+
+        fun ej17() {
+            val pri = Array(10) {
+                Random.nextInt(20)
+            }
+            val sec = Array(10) {
+                Random.nextInt(20)
+            }
+            val repetidos = Array(10) {
+                0
+            }
+            val diferentes = Array(20) {
+                0
+            }
+            var repCur = 0
+            var difCur = 0
+
+            // agregar los del vector 1 que no están en el 2
+            for (n1 in pri) {
+                var ta = false
+                for (n2 in sec) {
+                    if (n1 == n2) {
+                        ta = true
+                        break
+                    }
+                }
+                if (ta) {
+                    repetidos[repCur++] = n1
+                } else {
+                    diferentes[difCur++] = n1
+                }
+            }
+
+            // agregar los del vector 2 que no están en los repetidos
+            for (n2 in sec) {
+                var ta  =false
+                for (r in repetidos) {
+                    if (n2 == r) {
+                        ta = true
+                        break
+                    }
+                }
+                if (!ta) {
+                    diferentes[difCur++] = n2
+                }
+            }
+
+            printArray(pri)
+            printArray(sec)
+            printArraySize(repetidos, repCur)
+            printArraySize(diferentes, difCur)
         }
     }
 }
 
 fun main() {
-    TP4.ej16()
+    TP4.ej17()
 }
