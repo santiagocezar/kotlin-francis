@@ -285,15 +285,6 @@ class TP3 {
             }
         }
 
-        fun obtenerNum(msg: String, err: String): Int {
-            while (true) {
-                print(msg)
-                val n = readLine()!!.toIntOrNull()
-                if (n != null) return n
-                println(err)
-            }
-        }
-
         fun obtenerEdad(sex: String): Int {
             while (true) {
                 var edad = obtenerNum("Ingrese la edad: ", "Ingrese una edad válida")
@@ -455,19 +446,6 @@ Realizar un programa que calcule el sueldo líquido de un empleado a comisión. 
 El programa debe permitir hacer este cálculo para una cantidad de N empleados. Utilizar funciones en la forma que crea adecuada.
 */
 
-
-fun obtenerSiNo(msg: String, default: Boolean = true): Boolean {
-    while (true) {
-        val cartel = if (default) " [Y/n]: " else " [y/N]: "
-        print(msg + cartel)
-        val n = readLine()!!
-        if (n == "") return default
-        when (n[0]) {
-            'Y', 'y', 'S', 's' -> return true
-            'N', 'n' -> return false
-        }
-    }
-}
 
 fun ej18() {
     val sueldoBasico = obtenerNum("Ingrese el sueldo básico: ", "No es un número").toFloat()

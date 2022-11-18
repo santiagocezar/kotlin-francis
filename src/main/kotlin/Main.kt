@@ -17,15 +17,33 @@ class TP5 {
         }
 
         fun ej2() {
-            val lauti = Triangulo(60, 90, 50)
-            val sami = Triangulo(45, 45, 45)
-            val juani = Triangulo(99, 99, 99)
-            val santi = Triangulo(80, 60, 80)
+            val triangulos = Array(3) {
+                Triangulo()
+            }
 
-            val ladoMayorLauti = lauti.ladoMayor()
-            println("lado mayor del bauti $ladoMayorLauti")
-            val samiEqui = sami.esEquilatero()
-            println(    "el cami es equilatero? $samiEqui")
+            for (i in triangulos.indices) {
+                val tri = triangulos[i]
+                val mayor = tri.ladoMayor()
+                val equi = if (tri.esEquilatero()) "si" else "no"
+                println("lado mayor del triangulo ${i+1}: $mayor")
+                println("es equilatero? $equi")
+            }
+        }
+
+        fun ej3() {
+            val alumnos = Array(4) {
+                Alumno()
+            }
+
+            for (alumno in alumnos) {
+                print("${alumno.nombre} está ")
+
+                if (alumno.aprobado()) {
+                    println("aprobado \uD83E\uDD73")
+                } else {
+                    println("desaprobado \uD83D\uDE2D")
+                }
+            }
         }
     }
 }
