@@ -88,5 +88,19 @@ class TP5 {
             d.printCuadrante()
             e.printCuadrante()
         }
+
+        fun ej6() {
+            val hijos = Array(4) {
+                Hijo()
+            }
+
+            println()
+            for (hijo in hijos) {
+                hijo.printMe()
+                hijo.printCeluPar()
+                hijo.printMayorDeEdad()
+                println()
+            }
+        }
     }
 }
