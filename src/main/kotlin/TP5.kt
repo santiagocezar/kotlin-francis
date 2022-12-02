@@ -102,5 +102,13 @@ class TP5 {
                 println()
             }
         }
+        
+        fun ej7() {
+            val hijos = Hijos()
+            hijos.readEdades()
+
+            hijos.mayorIndex()
+            hijos.promedio()
+        }
     }
 }

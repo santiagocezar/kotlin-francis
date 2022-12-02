@@ -1,3 +1,3 @@
 fun main() {
-    TP5.ej6()
+    TP5.ej7()
 }
